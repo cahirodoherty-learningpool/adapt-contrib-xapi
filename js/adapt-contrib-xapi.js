@@ -293,11 +293,11 @@ define([
     */
     checkWrapperConfig: function() {
       if (this.xapiWrapper.lrs.endpoint && this.xapiWrapper.lrs.actor
-        && this.xapiWrapper.lrs.auth && this.xapiWrapper.lrs.activity_id ) {
-          return true;
-        } else {
-          return false;
-        }
+        && this.xapiWrapper.lrs.auth && this.xapiWrapper.lrs.activity_id) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     /**
@@ -926,8 +926,10 @@ define([
         statement.result = result;
       }
 
-      if (context) {
-        statement.context = context;
+      var wrapperReceivedContext = this.xapiWrapper.lrs && this.xapiWrapper.lrs.extended && this.xapiWrapper.lrs.extended.context
+
+      if (context || wrapperReceivedContext) {
+        statement.context = context || decodeURI(wrapperReceivedContext);
       }
 
       if (this.get('_generateIds')) {
@@ -1120,7 +1122,7 @@ define([
       }
 
       try {
-        switch(key) {
+        switch (key) {
           case 'actor': {
             var actor = JSON.parse(this.xapiWrapper.lrs[key]);
 
