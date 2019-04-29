@@ -926,10 +926,10 @@ define([
         statement.result = result;
       }
 
-      var wrapperReceivedContext = this.xapiWrapper.lrs && this.xapiWrapper.lrs.extended && this.xapiWrapper.lrs.extended.context
+      var wrapperReceivedContext = this.getLRSExtendedAttribute('context');
 
       if (context || wrapperReceivedContext) {
-        statement.context = context || JSON.parse(wrapperReceivedContext).context;
+        statement.context = context || wrapperReceivedContext.context;
       }
 
       if (this.get('_generateIds')) {
@@ -1187,8 +1187,8 @@ define([
       }
 
       try {
-        if (key === 'definition') {
-          return JSON.parse(extended.definition);
+        if (key === 'definition' || key === 'context') {
+          return JSON.parse(extended[key]);
         }
 
         return extended[key];
