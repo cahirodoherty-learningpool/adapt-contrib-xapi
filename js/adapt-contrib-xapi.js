@@ -929,7 +929,7 @@ define([
       var wrapperReceivedContext = this.xapiWrapper.lrs && this.xapiWrapper.lrs.extended && this.xapiWrapper.lrs.extended.context
 
       if (context || wrapperReceivedContext) {
-        statement.context = context || decodeURI(wrapperReceivedContext);
+        statement.context = context || JSON.parse(wrapperReceivedContext).context;
       }
 
       if (this.get('_generateIds')) {
