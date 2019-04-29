@@ -929,7 +929,7 @@ define([
       var wrapperReceivedContext = this.getLRSExtendedAttribute('context');
 
       if (context || wrapperReceivedContext) {
-        statement.context = context || wrapperReceivedContext.context;
+        statement.context = context || wrapperReceivedContext;
       }
 
       if (this.get('_generateIds')) {
